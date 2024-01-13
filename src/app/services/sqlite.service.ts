@@ -12,7 +12,7 @@ import { CapacitorHttp } from '@capacitor/core';
 export class SQLiteService {
   //private db: any;
   db = CapacitorSQLite;
-  private apiUrl = 'http://192.168.108.184/ionic_perpus/api.php';
+  private apiUrl = 'http://localhost/ionic_perpus/api.php'; // sesuaikan dengan alamat API Anda
   constructor(private http: HttpClient) {
     this.initializeDatabase();
   }
