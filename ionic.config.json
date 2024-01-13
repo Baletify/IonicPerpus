@@ -1,0 +1,7 @@
+{
+  "name": "IonicPerpus",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
