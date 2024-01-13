@@ -11,6 +11,30 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'buku',
+    loadChildren: () => import('./pages/buku/buku.module').then( m => m.BukuPageModule)
+  },
+  {
+    path: 'peminjaman',
+    loadChildren: () => import('./pages/peminjaman/peminjaman.module').then( m => m.PeminjamanPageModule)
+  },
+  {
+    path: 'pengembalian',
+    loadChildren: () => import('./pages/pengembalian/pengembalian.module').then( m => m.PengembalianPageModule)
+  },
+  {
+    path: 'buku',
+    loadChildren: () => import('./pages/buku/buku.module').then( m => m.BukuPageModule)
+  },
+  {
+    path: 'peminjaman',
+    loadChildren: () => import('./pages/peminjaman/peminjaman.module').then( m => m.PeminjamanPageModule)
+  },
+  {
+    path: 'pengembalian',
+    loadChildren: () => import('./pages/pengembalian/pengembalian.module').then( m => m.PengembalianPageModule)
+  },
 ];
 
 @NgModule({

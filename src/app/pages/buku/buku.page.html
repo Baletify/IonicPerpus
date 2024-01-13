@@ -1,0 +1,140 @@
+<ion-header [translucent]="true" class="ion-header">
+  <ion-toolbar>
+    <ion-title>Halaman Daftar Buku</ion-title>
+    <ion-icon
+      name="chevron-back-circle-sharp"
+      slot="start"
+      size="large"
+      routerLink="/home"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button expand="block" id="open-modal-insert"
+    >Tambah Data Buku</ion-button
+  >
+  <ion-accordion-group expand="inset">
+    <ion-accordion *ngFor="let buku of daftar_buku">
+      <ion-item slot="header" color="light" (click)="selectBuku(buku)">
+        <ion-icon name="book" slot="start" size="medium"></ion-icon>
+        <ion-label>{{buku.nama_buku}}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Id_Buku: {{buku.id_buku}}</div>
+      <div class="ion-padding" slot="content">
+        Judul Buku: {{buku.nama_buku}}
+      </div>
+      <div class="ion-padding" slot="content">Penulis: {{buku.pengarang}}</div>
+      <div class="ion-padding" slot="content">Penerbit: {{buku.penerbit}}</div>
+      <div class="ion-padding" slot="content">
+        <ion-button color="warning" id="open-modal-update-{{buku.id_buku}}"
+          >Edit</ion-button
+        >
+        <ion-button color="danger" id="delete-alert-{{buku.id_buku}}"
+          >Hapus</ion-button
+        >
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- modal insert buku starts-->
+  <ion-modal trigger="open-modal-insert">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelInsert()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Tambah Data Buku</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmInsert()" [strong]="true"
+              >Confirm</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Nama Buku"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Buku"
+            [(ngModel)]="nama_buku"
+          ></ion-input>
+          <ion-input
+            label="Nama Pengarang"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Pengarang"
+            [(ngModel)]="pengarang"
+          ></ion-input>
+          <ion-input
+            label="Nama Penerbit"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Penerbit"
+            [(ngModel)]="penerbit"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- modal insert buku ends -->
+
+  <!-- modal update buku starts -->
+  <ion-modal trigger="open-modal-update-{{selectedIDBuku}}">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelUpdate()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Update Data Buku</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmUpdate()" [strong]="true"
+              >Confirm</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Nama Buku"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Buku"
+            [(ngModel)]="nama_buku"
+          ></ion-input>
+          <ion-input
+            label="Nama Pengarang"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Pengarang"
+            [(ngModel)]="pengarang"
+          ></ion-input>
+          <ion-input
+            label="Nama Penerbit"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Masukkan Nama Penerbit"
+            [(ngModel)]="penerbit"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<!-- modal update buku ends -->
+
+<!-- alert delete buku starts -->
+<ion-alert
+  trigger="delete-alert-{{selectedIDBuku}}"
+  header="Yakin ingin menghapus data buku ini?"
+  [buttons]="alertButtons"
+></ion-alert>
+
+<!-- alert delete buku ends -->

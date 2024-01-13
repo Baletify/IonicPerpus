@@ -1,0 +1,121 @@
+<ion-header [translucent]="true" class="ion-header">
+  <ion-toolbar>
+    <ion-icon
+      name="chevron-back-circle-sharp"
+      slot="start"
+      size="large"
+      routerLink="/home"
+    ></ion-icon>
+    <ion-title>Daftar Peminjaman Buku</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button expand="block" id="open-modal-insert"
+    >Tambah Data Peminjaman</ion-button
+  >
+  <ion-accordion-group expand="inset">
+    <ion-accordion *ngFor="let pj of daftar_peminjaman">
+      <ion-item slot="header" color="light" (click)="selectPj(pj)">
+        <ion-icon name="person-sharp" slot="start" size="medium"></ion-icon>
+        <ion-label>Peminjam: {{pj.nama_peminjam}}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        Nama Peminjam: {{pj.nama_peminjam}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Buku yang Dipinjam: {{pj.nama_buku}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Waktu saat dipinjam: {{pj.waktu_peminjaman}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Waktu Pengembalian: {{pj.waktu_pengembalian}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Status: {{pj.status_peminjaman}}
+      </div>
+      <div class="ion-padding" slot="content">
+        <ion-button color="success" id="status-alert-{{pj.id_peminjaman}}"
+          >Update Status</ion-button
+        >
+        <ion-button color="danger" id="delete-alert-{{pj.id_peminjaman}}"
+          >Hapus</ion-button
+        >
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-content>
+
+<!-- modal insert buku starts-->
+<ion-modal trigger="open-modal-insert">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancelInsert()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Tambah Data Peminjaman</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirmInsert()" [strong]="true"
+            >Confirm</ion-button
+          >
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input
+          label="Nama Peminjam"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Masukkan Nama Peminjam"
+          [(ngModel)]="nama_peminjam"
+        ></ion-input>
+        <ion-list>
+          <div class="ion-padding">Masukkan Judul Buku</div>
+          <ion-radio-group value="space-between" [(ngModel)]="selectedBuku">
+            <ion-item *ngFor="let buku_pj of daftar_buku">
+              <ion-radio [value]="buku_pj">{{ buku_pj.nama_buku }}</ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <ion-input
+          label="Waktu Peminjaman"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Masukkan waktu peminjaman"
+          [(ngModel)]="waktu_peminjaman"
+        ></ion-input>
+        <ion-input
+          label="Waktu Pengembalian"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Masukkan waktu pengembalian"
+          [(ngModel)]="waktu_pengembalian"
+        ></ion-input>
+        <ion-input
+          label="Status peminjaman"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="Masukkan status peminjaman"
+          [(ngModel)]="status_peminjaman"
+        ></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- modal insert buku ends -->
+
+<ion-alert
+  trigger="delete-alert-{{selectedPj}}"
+  header="Yakin ingin menghapus data peminjaman ini?"
+  [buttons]="alertButtons"
+></ion-alert>
+
+<ion-alert
+  trigger="status-alert-{{selectedPj}}"
+  header="Yakin ingin mengubah data peminjaman ini?"
+  [buttons]="alertUpdate"
+></ion-alert>

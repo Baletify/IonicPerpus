@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" class="ion-header">
+  <ion-toolbar>
+    <ion-icon
+      name="chevron-back-circle-sharp"
+      slot="start"
+      size="large"
+      routerLink="/home"
+    ></ion-icon>
+    <ion-title>Daftar Pengembalian Buku</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-accordion-group expand="inset">
+    <ion-accordion *ngFor="let pb of daftar_pengembalian">
+      <ion-item slot="header" color="light">
+        <ion-icon name="person-sharp" slot="start" size="medium"></ion-icon>
+        <ion-label>Peminjam: {{pb.nama_peminjam}}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        Nama Peminjam: {{pb.nama_peminjam}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Buku yang Dipinjam: {{pb.nama_buku}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Waktu Peminjaman: {{pb.waktu_peminjaman}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Waktu Pengembalian: {{pb.waktu_pengembalian}}
+      </div>
+      <div class="ion-padding" slot="content">
+        Status: {{pb.status_peminjaman}}
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-content>
